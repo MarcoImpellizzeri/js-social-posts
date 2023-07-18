@@ -96,11 +96,14 @@ for (let i = 0; i < posts.length; i++) {
     if (singlePost.author.image === null || singlePost.author.image === "") {
         const initials = singlePost.author.name.charAt(0).toUpperCase();
 
+        // ad un div e uno span figli del primo div con classe "post-meta" 
+        // aggiunta classe "profile-pick-not-found"
+        // aggiunta classe "profile-pick-not-found-text"
         postDiv.innerHTML +=
         `
         <div class="post__header">
             <div class="post-meta">                    
-                <div class="post-meta__icon profile-pick-not-found">
+                <div class="post-meta__icon profile-pick-not-found"> 
                     <span class="profile-initial profile-pick-not-found-text">${initials}</span>
                 </div>
                 <div class="post-meta__data">

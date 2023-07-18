@@ -124,6 +124,8 @@ h1 {
     cursor: default;
 }
 
+
+/* elementi creati in caso l'utente non abbia un immagine priofilo */
 .profile-pick-not-found {
     width: 60px;
     height: 60px;
