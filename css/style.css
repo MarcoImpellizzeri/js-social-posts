@@ -123,3 +123,17 @@ h1 {
     color: #0CD977;
     cursor: default;
 }
+
+.profile-pick-not-found {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-pick-not-found-text {
+    text-align: center;
+}

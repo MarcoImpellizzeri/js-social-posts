@@ -1,3 +1,5 @@
+"use strict"
+
 // Descrizione
 // Ricreiamo un feed social aggiungendo al layout di base fornito, il nostro script JS in cui:
 
@@ -74,6 +76,94 @@ const posts = [
 
 // Milestone 2
 //  - Prendendo come riferimento il layout di esempio presente nell’html, stampiamo i post del nostro feed.
+
+// recupero l'elemento il cui andro ad inserire i div per i miei post
+const postList = document.querySelector(".posts-list");
+
+// un ciclo for per farl controllare i miei oggetti e farli stampare nel DOM
+for (let i = 0; i < posts.length; i++) {
+    const singlePost = posts[i];
+
+    // creo il div padre con classe post
+    const postDiv = document.createElement("div");
+
+    postDiv.classList.add("post");
+
+    console.log(postDiv);
+
+    // condizione per la quale se l'immagine di profilo dovesse essere null viene 
+    // inserito un elemento creato da me con l'iniziale del nome dell'utente
+    if (singlePost.author.image === null || singlePost.author.image === "") {
+        const initials = singlePost.author.name.charAt(0).toUpperCase();
+
+        postDiv.innerHTML +=
+        `
+        <div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon profile-pick-not-found">
+                    <span class="profile-initial profile-pick-not-found-text">${initials}</span>
+                </div>
+                <div class="post-meta__data">
+                    <div class="post-meta__author">${singlePost.author.name}</div>
+                    <div class="post-meta__time">${singlePost.created}</div>
+                </div>                    
+            </div>
+        </div>
+        <div class="post__text">${singlePost.content}</div>
+        <div class="post__image">
+            <img src="${singlePost.media}" alt="">
+        </div>
+        <div class="post__footer">
+            <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                    </a>
+                </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-1" class="js-likes-counter">${singlePost.likes}</b> persone
+                </div>
+            </div> 
+        </div>
+        `
+    } else {
+        postDiv.innerHTML +=
+        `
+        <div class="post__header">
+            <div class="post-meta">                    
+                <div class="post-meta__icon">
+                    <img class="profile-pic" src="${singlePost.author.image}" alt="Phil Mangione">                    
+                </div>
+                <div class="post-meta__data">
+                    <div class="post-meta__author">${singlePost.author.name}</div>
+                    <div class="post-meta__time">${singlePost.created}</div>
+                </div>                    
+            </div>
+        </div>
+        <div class="post__text">${singlePost.content}</div>
+        <div class="post__image">
+            <img src="${singlePost.media}" alt="">
+        </div>
+        <div class="post__footer">
+            <div class="likes js-likes">
+                <div class="likes__cta">
+                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                        <span class="like-button__label">Mi Piace</span>
+                    </a>
+                </div>
+                <div class="likes__counter">
+                    Piace a <b id="like-counter-1" class="js-likes-counter">${singlePost.likes}</b> persone
+                </div>
+            </div> 
+        </div>
+        `;
+    }
+
+    // appendo il mio elemento creato alla postList
+    postList.appendChild(postDiv);
+};
 
 // Milestone 3
 //  - Se clicchiamo sul tasto “Mi Piace” cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
