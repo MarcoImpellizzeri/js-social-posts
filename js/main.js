@@ -100,69 +100,67 @@ for (let i = 0; i < posts.length; i++) {
         // aggiunta classe "profile-pick-not-found"
         // aggiunta classe "profile-pick-not-found-text"
         postDiv.innerHTML +=
-        `
-        <div class="post__header">
-            <div class="post-meta">                    
-                <div class="post-meta__icon profile-pick-not-found"> 
-                    <span class="profile-initial profile-pick-not-found-text">${initials}</span>
+            `
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon profile-pick-not-found"> 
+                        <span class="profile-initial profile-pick-not-found-text">${initials}</span>
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${singlePost.author.name}</div>
+                        <div class="post-meta__time">${singlePost.created}</div>
+                    </div>                    
                 </div>
-                <div class="post-meta__data">
-                    <div class="post-meta__author">${singlePost.author.name}</div>
-                    <div class="post-meta__time">${singlePost.created}</div>
-                </div>                    
             </div>
-        </div>
-        <div class="post__text">${singlePost.content}</div>
-        <div class="post__image">
-            <img src="${singlePost.media}" alt="">
-        </div>
-        <div class="post__footer">
-            <div class="likes js-likes">
-                <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
-                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                        <span class="like-button__label">Mi Piace</span>
-                    </a>
-                </div>
-                <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${singlePost.likes}</b> persone
-                </div>
-            </div> 
-        </div>
-        `
-    } else {
+            <div class="post__text">${singlePost.content}</div>
+            <div class="post__image">
+                <img src="${singlePost.media}" alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${singlePost.likes}</b> persone
+                    </div>
+                </div> 
+            </div>
+        ` } else {
         postDiv.innerHTML +=
-        `
-        <div class="post__header">
-            <div class="post-meta">                    
-                <div class="post-meta__icon">
-                    <img class="profile-pic" src="${singlePost.author.image}" alt="Phil Mangione">                    
+            `
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src="${singlePost.author.image}" alt="Phil Mangione">                    
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${singlePost.author.name}</div>
+                        <div class="post-meta__time">${singlePost.created}</div>
+                    </div>                    
                 </div>
-                <div class="post-meta__data">
-                    <div class="post-meta__author">${singlePost.author.name}</div>
-                    <div class="post-meta__time">${singlePost.created}</div>
-                </div>                    
             </div>
-        </div>
-        <div class="post__text">${singlePost.content}</div>
-        <div class="post__image">
-            <img src="${singlePost.media}" alt="">
-        </div>
-        <div class="post__footer">
-            <div class="likes js-likes">
-                <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
-                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                        <span class="like-button__label">Mi Piace</span>
-                    </a>
-                </div>
-                <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${singlePost.likes}</b> persone
-                </div>
-            </div> 
-        </div>
-        `;
-    }
+            <div class="post__text">${singlePost.content}</div>
+            <div class="post__image">
+                <img src="${singlePost.media}" alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${singlePost.likes}</b> persone
+                    </div>
+                </div> 
+            </div>
+        `};
 
     // appendo il mio elemento creato alla postList
     postList.appendChild(postDiv);
@@ -171,3 +169,42 @@ for (let i = 0; i < posts.length; i++) {
 // Milestone 3
 //  - Se clicchiamo sul tasto “Mi Piace” cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo.
 // Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+
+
+// variabile che contiene tutti i miei button 
+const likeBtns = document.querySelectorAll(".js-like-button");
+
+// ciclo forEach per lavorare su tutti i miei button 
+likeBtns.forEach(function (likeBtn) {
+
+    // utilizzo ".parentElement.nextElementSibling" 
+    // per selezionare l'elemento fratello corrispondente del button 
+    const likeCounter = likeBtn.parentElement.nextElementSibling.querySelector(".js-likes-counter");
+
+    // creata una variabile con valore il numero di likecorrenti
+    let likes = parseInt(likeCounter.textContent);
+
+
+    likeBtn.addEventListener("click", function (event) {
+
+        // ho utilizzato "event.preventDefault()" per prevenire 
+        // il comportamento predefinito del click sul link
+        event.preventDefault();
+
+        // un if che aggiunge una classe like per fare un controllo 
+        // e modificare il bottone e il contatore di like
+        if (!likeBtn.classList.contains("liked")) {
+            likeBtn.classList.add("liked");
+            likeBtn.style.color = "white";
+            likeBtn.style.backgroundColor = "gray";
+            likes++;
+        } else {
+            likeBtn.classList.remove("liked");
+            likeBtn.style.color = "";
+            likeBtn.style.backgroundColor = "";
+            likes--;
+        }
+
+        likeCounter.textContent = likes;
+    });
+});
